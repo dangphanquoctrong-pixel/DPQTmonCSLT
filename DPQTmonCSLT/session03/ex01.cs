@@ -6,7 +6,7 @@ namespace DPQTmonCSLT.session03
 {
     internal class ex01
     {
-        static void Main(string[] args)
+        static void Cau1()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -19,10 +19,10 @@ namespace DPQTmonCSLT.session03
 
             Console.WriteLine($"Chuyển từ độ C sang độ F: {doF:F0}");
             Console.WriteLine($"Chuyển từ độ C sang độ K: {doK:F0}");
-
-
-
-
+            Console.ReadKey();
+        }
+        static void Cau2()
+        {
             Console.WriteLine("Câu 2: Tính diện tính mặt cầu và thể tích hình cầu:");
             double r, sCau, vCau;
             Console.Write("Nhập bán kính: ");
@@ -31,7 +31,10 @@ namespace DPQTmonCSLT.session03
             vCau = 4 / 3 * Math.PI * r * r * r;
             Console.WriteLine($"Diện tích mặt cầu là:{sCau:F2}");
             Console.WriteLine($"Thể tích hình cầu là:{vCau:F2} ");
-
+            Console.ReadKey();
+        }
+        static void Cau3()
+        {
             Console.WriteLine("Câu 3: Thực  hiện các phép tính");
             int a, b, tong, hieu, tich, thuong, mod;
             Console.Write("Nhập số a:");
@@ -51,5 +54,11 @@ namespace DPQTmonCSLT.session03
             Console.WriteLine("a%b= " + mod);
             Console.ReadKey();
         }
+            static void Main(string[] args)
+            {
+            Cau1();
+            Cau2();
+            Cau3();
+            }
     }
 }
