@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Net.Http.Headers;
 using System.Runtime.Intrinsics.X86;
+using System.Security.Principal;
 using System.Text;
 
 namespace DPQTmonCSLT.session03
@@ -142,17 +144,56 @@ namespace DPQTmonCSLT.session03
                     break;
             }
             ngoaiTeNhanDuoc = tienVietTinhDoi / tyGiaApDung; 
-            Console.WriteLine($"Phí dịch vụ:{phiDichVu} VND");
-            Console.WriteLine($"Số tiền Việt Nam tính đổi:{tienVietTinhDoi} VND");
-            Console.WriteLine($"Số tiền nhận{tienchon} được :{ngoaiTeNhanDuoc} VND");
+            Console.WriteLine($"Phí dịch vụ:{phiDichVu:#,##0} VND");
+            Console.WriteLine($"Số tiền Việt Nam tính đổi:{tienVietTinhDoi:#,##0} VND");
+            Console.WriteLine($"Số tiền {tienchon} nhận được :{ngoaiTeNhanDuoc:F2} {tienchon}");
             Console.ReadKey();
+        }
+        static void Bai4()
+        {
+            
+            Console.WriteLine("Bài 4: Tính tuổi chính xác và đếm ngược ngày sinh nhật: ");
+            Console.Write("Nhập ngày tháng năm sinh của bạn (dd/MM/yyyy): ");
+            string input = Console.ReadLine();
+            if (!DateTime.TryParseExact(input, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime ngaySinh))
+            {
+                Console.WriteLine("Lỗi: Ngày sinh không hợp lệ hoặc sai định dạng(dd/MM/yyyy)!");
+                return;
+            }
+            DateTime homNay = DateTime.Now.Date;
+            if (ngaySinh>homNay)
+            {
+                Console.WriteLine("Ngày sinh không được lớn hơn ngày hiện tại!");
+                return;
+            }
+             int tuoi = homNay.Year - ngaySinh.Year;
+            if (homNay < ngaySinh.AddYears(tuoi))
+            {
+                tuoi--;
+            }
+            TimeSpan thoiGianSong = homNay - ngaySinh;
+            int soNgaySong = (int)thoiGianSong.TotalDays;
+            DateTime sinhNhatKeTiep = new DateTime(homNay.Year,ngaySinh.Month,ngaySinh.Day);
+            if (sinhNhatKeTiep < homNay )
+            {
+                sinhNhatKeTiep = sinhNhatKeTiep.AddYears(1);
+            }
+            int  soNgayConLai = (int)(sinhNhatKeTiep - homNay).TotalDays;
+            Console.WriteLine($"Tuổi hiện tại: {tuoi} tuổi");
+            Console.WriteLine($"Bạn đã sống tổng cộng: {soNgaySong} ngày");
+            Console.WriteLine($"Sinh nhật tiếp theo còn: {soNgayConLai} ngày");
+            
+            Console.ReadKey();
+
+
         }
 
         static void Main(string[] args)
         {
             Bai1();
             Bai2();
-            Bai3();    
+            Bai3();
+            Bai4();
         }
-    }
+    }   
 }
