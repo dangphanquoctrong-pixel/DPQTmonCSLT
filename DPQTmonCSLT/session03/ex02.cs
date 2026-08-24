@@ -187,40 +187,69 @@ namespace DPQTmonCSLT.session03
         }
             static void Bai5()
             {
-                float diemThangMuoi;
+            float diemThangMuoi,diemToan,diemAnh,diemLapTrinh,diemThang4;
+            int tinchimontoan, tinchimonanh, tinchimonlaptrinh;
             Console.WriteLine("Bài 5: Quản lý điểm học phần và quy đổi thang điểm GPA (4.0)");
-              
+            Console.Write("Nhập điểm môn Toán của bạn: ");
+            diemToan = float.Parse(Console.ReadLine());
+            Console.Write("Nhập số tín chỉ: ");
+            tinchimontoan = int.Parse(Console.ReadLine());
 
-               
 
-                diemThangMuoi = float.Parse(Console.ReadLine());
-            Console.WriteLine($"Điểm trung bình thang 10: {diemThangMuoi}");
-            string diemChu, hocLuc;
-            if (diemThangMuoi <= 10 && diemThangMuoi >= 0)
+            Console.Write("Nhập điểm môn Tiếng Anh của bạn: ");
+            diemAnh = float.Parse(Console.ReadLine());
+            Console.Write("Nhập số tín chỉ: ");
+            tinchimonanh = int.Parse(Console.ReadLine());
+
+
+            Console.Write("Nhập điểm môn Cơ sở lập trình của bạn: ");
+            diemLapTrinh = float.Parse(Console.ReadLine());
+            Console.Write("Nhập số tín chỉ: ");
+            tinchimonlaptrinh = int.Parse(Console.ReadLine());
+            if (diemToan>= 10 && diemToan <= 0)
             {
                 Console.WriteLine("Lỗi: Điểm thang 10 phải nằm trong khoảng từ 0 đến 10!");
                 return;
             }
+            if (diemAnh >= 10 && diemAnh <= 0)
+            {
+                Console.WriteLine("Lỗi: Điểm thang 10 phải nằm trong khoảng từ 0 đến 10!");
+                return;
+            }
+            if (diemLapTrinh >= 10 && diemLapTrinh <= 0)
+            {
+                Console.WriteLine("Lỗi: Điểm thang 10 phải nằm trong khoảng từ 0 đến 10!");
+                return;
+            }
+            diemThangMuoi = (diemToan * tinchimontoan + diemAnh * tinchimonanh + diemLapTrinh * tinchimonlaptrinh)/(tinchimontoan+ tinchimonanh +tinchimonlaptrinh);
+            Console.WriteLine($"Điểm trung bình thang 10: {diemThangMuoi}");
+            string diemChu, hocLuc;
+            
                 if (diemThangMuoi >= 8.5)
                 {
                     diemChu = "A";
+                    diemThang4 = 4.0f;
                 }
                 else if (diemThangMuoi >= 7)
                 {
                     diemChu = "B";
-                }
+                diemThang4 = 3.0f;
+            }
                 else if (diemThangMuoi >= 5.5)
                 {
                     diemChu = "C";
-                }
+                diemThang4 = 2.0f;
+            }
                 else if (diemThangMuoi >= 4)
                 {
                     diemChu = "D";
-                }
+                diemThang4 = 1.0f;
+            }
                 else
                 {
                     diemChu = "F";
-                }
+                diemThang4 = 0.0f;
+            }
                 if (diemChu == "A")
                 {
                     hocLuc = "Xuất sắc/Giỏi";
@@ -240,14 +269,11 @@ namespace DPQTmonCSLT.session03
                 else 
                     hocLuc = "Kém (Trượt)";
                 Console.WriteLine($"Điểm chữ quy đổi: {diemChu}");
-                Console.WriteLine($"Điểm GPA thang 4: {hocLuc}");
+                Console.WriteLine($"Điểm GPA thang 4: {diemThang4}");
                 Console.WriteLine($"Xếp loại học lực: {hocLuc}");
                 Console.ReadKey();
             }
 
-
-
-        
 
         static void Main(string[] args)
         {
