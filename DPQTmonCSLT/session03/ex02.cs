@@ -151,7 +151,7 @@ namespace DPQTmonCSLT.session03
         }
         static void Bai4()
         {
-            
+
             Console.WriteLine("Bài 4: Tính tuổi chính xác và đếm ngược ngày sinh nhật: ");
             Console.Write("Nhập ngày tháng năm sinh của bạn (dd/MM/yyyy): ");
             string input = Console.ReadLine();
@@ -161,32 +161,93 @@ namespace DPQTmonCSLT.session03
                 return;
             }
             DateTime homNay = DateTime.Now.Date;
-            if (ngaySinh>homNay)
+            if (ngaySinh > homNay)
             {
                 Console.WriteLine("Ngày sinh không được lớn hơn ngày hiện tại!");
                 return;
             }
-             int tuoi = homNay.Year - ngaySinh.Year;
+            int tuoi = homNay.Year - ngaySinh.Year;
             if (homNay < ngaySinh.AddYears(tuoi))
             {
                 tuoi--;
             }
             TimeSpan thoiGianSong = homNay - ngaySinh;
             int soNgaySong = (int)thoiGianSong.TotalDays;
-            DateTime sinhNhatKeTiep = new DateTime(homNay.Year,ngaySinh.Month,ngaySinh.Day);
-            if (sinhNhatKeTiep < homNay )
+            DateTime sinhNhatKeTiep = new DateTime(homNay.Year, ngaySinh.Month, ngaySinh.Day);
+            if (sinhNhatKeTiep < homNay)
             {
                 sinhNhatKeTiep = sinhNhatKeTiep.AddYears(1);
             }
-            int  soNgayConLai = (int)(sinhNhatKeTiep - homNay).TotalDays;
+            int soNgayConLai = (int)(sinhNhatKeTiep - homNay).TotalDays;
             Console.WriteLine($"Tuổi hiện tại: {tuoi} tuổi");
             Console.WriteLine($"Bạn đã sống tổng cộng: {soNgaySong} ngày");
             Console.WriteLine($"Sinh nhật tiếp theo còn: {soNgayConLai} ngày");
-            
+
             Console.ReadKey();
-
-
         }
+            static void Bai5()
+            {
+                float diemThangMuoi;
+            Console.WriteLine("Bài 5: Quản lý điểm học phần và quy đổi thang điểm GPA (4.0)");
+              
+
+               
+
+                diemThangMuoi = float.Parse(Console.ReadLine());
+            Console.WriteLine($"Điểm trung bình thang 10: {diemThangMuoi}");
+            string diemChu, hocLuc;
+            if (diemThangMuoi <= 10 && diemThangMuoi >= 0)
+            {
+                Console.WriteLine("Lỗi: Điểm thang 10 phải nằm trong khoảng từ 0 đến 10!");
+                return;
+            }
+                if (diemThangMuoi >= 8.5)
+                {
+                    diemChu = "A";
+                }
+                else if (diemThangMuoi >= 7)
+                {
+                    diemChu = "B";
+                }
+                else if (diemThangMuoi >= 5.5)
+                {
+                    diemChu = "C";
+                }
+                else if (diemThangMuoi >= 4)
+                {
+                    diemChu = "D";
+                }
+                else
+                {
+                    diemChu = "F";
+                }
+                if (diemChu == "A")
+                {
+                    hocLuc = "Xuất sắc/Giỏi";
+                }
+                else if (diemChu == "B")
+                {
+                    hocLuc = "Khá";
+                }
+                else if (diemChu == "C")
+                {
+                    hocLuc = "Trung bình";
+                }
+                else if (diemChu == "D")
+                { 
+                    hocLuc = "Yếu";
+                }
+                else 
+                    hocLuc = "Kém (Trượt)";
+                Console.WriteLine($"Điểm chữ quy đổi: {diemChu}");
+                Console.WriteLine($"Điểm GPA thang 4: {hocLuc}");
+                Console.WriteLine($"Xếp loại học lực: {hocLuc}");
+                Console.ReadKey();
+            }
+
+
+
+        
 
         static void Main(string[] args)
         {
@@ -194,6 +255,7 @@ namespace DPQTmonCSLT.session03
             Bai2();
             Bai3();
             Bai4();
+            Bai5();
         }
     }   
 }
