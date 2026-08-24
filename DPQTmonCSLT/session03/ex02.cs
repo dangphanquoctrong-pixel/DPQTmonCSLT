@@ -273,6 +273,10 @@ namespace DPQTmonCSLT.session03
                 Console.WriteLine($"Xếp loại học lực: {hocLuc}");
                 Console.ReadKey();
             }
+        static void Bai6()
+        { 
+
+        }
 
 
         static void Main(string[] args)
@@ -282,6 +286,8 @@ namespace DPQTmonCSLT.session03
             Bai3();
             Bai4();
             Bai5();
+            Bai5();
+            Bai6();
         }
     }   
 }
