@@ -274,18 +274,83 @@ namespace DPQTmonCSLT.session03
                 Console.ReadKey();
             }
         static void Bai6()
-        { 
+        {
 
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
+            string hovaten; 
+            Console.WriteLine("Câu 6:Chuẩn hóa họ tên người dùng và tự động tạo email/username");
+            Console.Write("Nhập họ và tên của bạn: ");
+            hovaten = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(hovaten))
+            {
+                Console.WriteLine("Họ và tên không được để trống!");
+                return;
+            }
+            string[] words = hovaten.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0;i < words.Length;i++)
+            {
+                string word = words[i].ToLower();
+                words[i] = char.ToUpper(word[0])+ word.Substring(1);    
+            }
+            string fullname = string.Join(" ",words);
+            string ho="";
+            string tendem="";
+            string ten="";
+            if (words.Length == 1)
+            {
+                ten = words[0];
+            }
+            else if (words.Length == 2)
+            { 
+                ho = words[0];
+                ten = words[1];
+            }
+            else
+            {
+                ho = words[0];
+                ten = words[words.Length - 1];
+                string[] middleWords = new string[words.Length - 2];
+                Array.Copy(words, 1, middleWords, 0, words.Length - 2);
+                tendem = string.Join(" ", middleWords);
+            }
+            string hokhongdau = bodautiengviet(ho).ToLower();
+            string tenDemKhongDau = bodautiengviet(tendem).Replace(" ", "").ToLower();
+            string tenKhongDau = bodautiengviet(ten).ToLower();
+            string username = $"{tenKhongDau}.{hokhongdau}{tenDemKhongDau}";
+            string email = $"{username}@company.edu.vn";
+
+            Console.WriteLine($"Họ tên chuẩn hóa: {fullname}");
+            Console.WriteLine($"Họ: {ho} | Tên đệm: {tendem} | Tên: {ten}");
+            Console.WriteLine($"Username tạo tự động: {username}");
+            Console.WriteLine($"Email cấp phát: {email}");
+
+            Console.ReadKey();
         }
+      
+        static string bodautiengviet(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return string.Empty;
 
+            string normalized = text.Normalize(NormalizationForm.FormD);
+            StringBuilder sb = new StringBuilder();
 
+            foreach (char c in normalized)
+            {
+                UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (uc != UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString().Normalize(NormalizationForm.FormC).Replace("đ", "d").Replace("Đ", "D");
+        }
         static void Main(string[] args)
         {
             Bai1();
             Bai2();
             Bai3();
             Bai4();
-            Bai5();
             Bai5();
             Bai6();
         }

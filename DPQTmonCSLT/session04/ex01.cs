@@ -75,8 +75,6 @@ namespace DPQTmonCSLT.session04
         }
         static void Bai4()
         {
-            Console.OutputEncoding = Encoding.UTF8;
-            Console.InputEncoding = Encoding.UTF8;
             float canh1, canh2, canh3;
             Console.WriteLine("Câu 4: Viết  chương trình kiểm tra xem một tam giác là tam giac đều" +
                 ",tam giác cân hay tam giác thường");
