@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Runtime.Intrinsics.X86;
 using System.Security.Principal;
 using System.Text;
+using System.Transactions;
 
 namespace DPQTmonCSLT.session03
 {
@@ -345,14 +346,70 @@ namespace DPQTmonCSLT.session03
             }
             return sb.ToString().Normalize(NormalizationForm.FormC).Replace("đ", "d").Replace("Đ", "D");
         }
+        static void Bai7()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
+            Console.WriteLine("Bài 7: Lập kế hoạch chi phí nhiên liệu và chia sẻ chuyến đi");
+            Console.Write("Nhập quãng đường chuyến đi (km): ");
+            double quangduong = double.Parse(Console.ReadLine());
+            Console.Write("Nhập mức tiêu hao nhiên liệu (lít/100km): ");
+            double muctieuthu = double.Parse(Console.ReadLine());
+            Console.Write("Nhập giá xăng (VND/lit): ");
+            decimal giaxang = decimal .Parse(Console.ReadLine());
+            Console.Write("Nhập số người đi: ");
+            int songuoi = int.Parse(Console.ReadLine());
+            double tongsolitxang = (quangduong / 100f) * muctieuthu;
+            decimal tongchiphitienxang = (decimal)tongsolitxang * giaxang;
+            decimal tienmoinguoi = tongchiphitienxang / songuoi;
+            Console.WriteLine($"Tổng nhiên liệu phải trả: {tongsolitxang:F2}");
+            Console.WriteLine($"Tổng chi phí xăng dầu: {tongchiphitienxang:#,##0} VND ");
+            Console.WriteLine($"Tổng chi phí mỗi người: {Math.Ceiling(tienmoinguoi):#,##0} VND");
+        }
+        static void Bai8()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
+            Console.WriteLine("Bài 8: Kiểm tra mã xác thực OTP và quản lý thời gian hiệu lực");
+            string systemOTP = "839201";
+            DateTime creationTime = DateTime.Now;
+            Console.WriteLine("Nhập mã OTP xác thực: ");
+            string userOTP = Console.ReadLine()?.Trim() ?? "";
+            Console.Write("Nhập số phút đã trôi qua: ");
+            int.TryParse(Console.ReadLine(), out int sophuttroiqua);
+            Console.Write("Nhập số giây đã trôi qua: ");
+            int.TryParse(Console.ReadLine(), out int sogiaytroiqua);
+            DateTime thoidiemxacthuc = creationTime.AddMinutes(sophuttroiqua).AddSeconds(sophuttroiqua);
+            TimeSpan thoigiantroiqua = thoidiemxacthuc - creationTime ;
+            bool dinhdanghople = userOTP.Length == 6 && int.TryParse(userOTP, out _);
+            if (!dinhdanghople)
+            {
+                Console.WriteLine("Trạng thái xác thực: THẤT BẠI - Lỗi định dạng không hợp lệ (Mã OTP phải gồm đúng 6 chữ số).");
+            }
+            bool makhop = userOTP == systemOTP;
+            if (!makhop)
+            {
+                Console.WriteLine("Trạng thái xác thực: THẤT BẠI - Mã không chính xác!");
+            }
+            bool hanthoigian = thoigiantroiqua.TotalSeconds > 300;
+            if(!hanthoigian)
+            {
+                Console.WriteLine($"Trạng thái xác thực: THẤT BẠI - Mã OTP hết hạn (Thời gian trôi qua: {thoigiantroiqua.Minutes} phút, {thoigiantroiqua.Seconds} giây");
+            }
+            Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt");
+            Console.ReadKey();
+        }
         static void Main(string[] args)
         {
-            Bai1();
-            Bai2();
-            Bai3();
-            Bai4();
-            Bai5();
-            Bai6();
+            //Bai1();
+            //Bai2();
+            //Bai3();
+            //Bai4();
+            //Bai5();
+            //Bai6();
+            //Bai7();
+            Bai8();
+
         }
     }   
 }
