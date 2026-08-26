@@ -5,7 +5,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>DPQTmonCSLT.session03.ex02</StartupObject>
+    <StartupObject>DPQTmonCSLT.session04.ex02</StartupObject>
   </PropertyGroup>
 
 </Project>

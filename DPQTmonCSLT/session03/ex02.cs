@@ -373,7 +373,7 @@ namespace DPQTmonCSLT.session03
             Console.WriteLine("Bài 8: Kiểm tra mã xác thực OTP và quản lý thời gian hiệu lực");
             string systemOTP = "839201";
             DateTime creationTime = DateTime.Now;
-            Console.WriteLine("Nhập mã OTP xác thực: ");
+            Console.Write("Nhập mã OTP xác thực: ");
             string userOTP = Console.ReadLine()?.Trim() ?? "";
             Console.Write("Nhập số phút đã trôi qua: ");
             int.TryParse(Console.ReadLine(), out int sophuttroiqua);
@@ -386,29 +386,84 @@ namespace DPQTmonCSLT.session03
             {
                 Console.WriteLine("Trạng thái xác thực: THẤT BẠI - Lỗi định dạng không hợp lệ (Mã OTP phải gồm đúng 6 chữ số).");
             }
-            bool makhop = userOTP == systemOTP;
-            if (!makhop)
+            else if (userOTP != systemOTP)
             {
                 Console.WriteLine("Trạng thái xác thực: THẤT BẠI - Mã không chính xác!");
             }
-            bool hanthoigian = thoigiantroiqua.TotalSeconds > 300;
-            if(!hanthoigian)
+            else if (thoigiantroiqua.TotalSeconds > 300)
             {
                 Console.WriteLine($"Trạng thái xác thực: THẤT BẠI - Mã OTP hết hạn (Thời gian trôi qua: {thoigiantroiqua.Minutes} phút, {thoigiantroiqua.Seconds} giây");
             }
-            Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt");
+            else
+            {
+                Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG - Giao dịch đã được phê duyệt");
+            }
             Console.ReadKey();
+        }
+        static void Bai9()
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
+            Console.WriteLine("Bài 9: Máy tính lương Gross - Net và thuế thu nhập cá nhân nhân viên");
+            Console.Write("Lương Gross (VND): ");
+            decimal luongGross = decimal.Parse(Console.ReadLine());
+            Console.Write("Số người phụ thuộc: ");
+            int songuoiphuthuoc = int.Parse(Console.ReadLine());
+            decimal BHXH = luongGross * 0.08m;
+            decimal BHYT = luongGross * 0.015m;
+            decimal BHTN = luongGross * 0.01m;
+            decimal tonggiamtrubaohiem = luongGross * 0.105m;
+            decimal thunhapchiuthue = luongGross - tonggiamtrubaohiem - 11000000m-songuoiphuthuoc*4400000m;
+            if (thunhapchiuthue<=0)
+            {
+                thunhapchiuthue = 0;
+            }
+            decimal  ThueTNCN;
+            if (thunhapchiuthue<=0)
+            {
+                ThueTNCN = 0;
+            }
+            if (thunhapchiuthue <=5000000)
+            {
+                ThueTNCN = thunhapchiuthue * 0.05m;
+            }
+            else if (thunhapchiuthue <=10000000)
+            {
+                ThueTNCN = 5000000m *0.05m+ (thunhapchiuthue-5000000m) * 0.1m;
+            }
+
+           else if (thunhapchiuthue <=18000000)
+            {
+                ThueTNCN = 5000000m*0.05m + 5000000m*0.1m + (thunhapchiuthue-10000000m) * 0.15m;
+            }
+            else
+            {
+                ThueTNCN = 5000000m * 0.05m + 5000000m * 0.1m + 8000000 * 0.15m+(thunhapchiuthue-18000000)*0.2m;
+            }
+
+            decimal LuongNET = luongGross - tonggiamtrubaohiem - ThueTNCN;
+            Console.WriteLine($"Giảm trừ bảo hiểm (10.5%): {tonggiamtrubaohiem:#,##0} VND");
+            Console.WriteLine($"Thu nhập chịu thuế: {thunhapchiuthue:#,##0} VND");
+            Console.WriteLine($"Thuế thu nhập cá nhận phải nộp: {ThueTNCN:#,##0} VND");
+            Console.WriteLine($"LƯƠNG NET THỰC NHẬN: {LuongNET:#,##0} VND");
+            Console.ReadKey();
+        }
+        static void Bai10()
+        {
+
         }
         static void Main(string[] args)
         {
-            //Bai1();
-            //Bai2();
-            //Bai3();
-            //Bai4();
-            //Bai5();
-            //Bai6();
-            //Bai7();
+            Bai1();
+            Bai2();
+            Bai3();
+            Bai4();
+            Bai5();
+            Bai6();
+            Bai7();
             Bai8();
+            Bai9();
+            Bai10();
 
         }
     }   
