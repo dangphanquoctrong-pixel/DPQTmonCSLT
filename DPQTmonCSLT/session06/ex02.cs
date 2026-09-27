@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DPQTmonCSLT.session07
+namespace DPQTmonCSLT.session06
 {
     internal class ex02
     {

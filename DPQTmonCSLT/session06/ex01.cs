@@ -4,7 +4,7 @@ using System.Data;
 using System.Reflection.Metadata;
 using System.Text;
 
-namespace DPQTmonCSLT.session07
+namespace DPQTmonCSLT.session06
 {
     internal class ex01
     {
