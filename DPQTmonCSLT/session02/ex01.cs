@@ -91,7 +91,7 @@ namespace DPQTmonCSLT.session02
             char kyTu = char.Parse(Console.ReadLine());
             int asciiValue = (int)kyTu;
             Console.WriteLine("Kết qủa là: " + asciiValue);
-        }
+        }   
         static void Cau8()
         {
             //8.to Calculate Area of Circle
